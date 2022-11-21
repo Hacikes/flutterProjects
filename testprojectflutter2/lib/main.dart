@@ -14,11 +14,41 @@ class QuoteList extends StatefulWidget {
 
 class _QuoteListState extends State<QuoteList> {
 
+  //Формируем список в соотвествии с параметрами класса quote.dart
   List<Quote> quotes = [
-    Quote(text: 'Who understand that understand', author: 'TGQA')
+    Quote(text: 'Who understood that understood', author: 'TGQA'),
+    Quote(text: 'Who understood that understood', author: 'TGQA'),
+    Quote(text: 'Who understood that understood', author: 'TGQA')
   ];
 
-
+  Widget quoteTemplate(quote){
+    return Card(
+      margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget> [
+            Text(
+              quote.text,
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.grey[600],
+              ),
+            ),
+            SizedBox(height: 6.0),
+            Text(
+              quote.author,
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Colors.grey[800],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +60,9 @@ class _QuoteListState extends State<QuoteList> {
         backgroundColor: Colors.redAccent,
       ),
       body: Column(
-        children: quotes.map((quote) => Text('${quote.text} - ${quote.author}')).toList(),
+        // Берем цитату и выводим её, в конце превращая её в список
+        children: quotes.map((quote) => quoteTemplate(quote)).toList(),
+
       ),
     );
   }
